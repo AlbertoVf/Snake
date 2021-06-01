@@ -22,8 +22,9 @@ def drawGrid(w, rows, surface):
 
 
 def redrawWindow(surface):
-    global rows, width
+    global rows, width, s
     surface.fill((0, 0, 0))
+    s.draw(surface)
     drawGrid(width, rows, surface)
     pygame.display.update()
 
@@ -37,7 +38,7 @@ def message_box(subject, content):
 
 
 def main():
-    global rows, width
+    global rows, width, s
     width = 500
     rows = 20
     win = pygame.display.set_mode((width, width))
@@ -47,8 +48,8 @@ def main():
     while flag:
         pygame.time.delay(50)
         clock.tick(10)
+        s.move()
         redrawWindow(win)
-    pass
 
 
 if __name__ == '__main__':

@@ -44,7 +44,14 @@ def randomSnack(rows, item):
 
 
 def message_box(subject, content):
-    pass
+    root = tk.Tk()
+    root.attributes("-topmost", True)
+    root.withdraw()
+    messagebox.showinfo(subject, content)
+    try:
+        root.destroy()
+    except:
+        pass
 
 
 def main():
@@ -65,6 +72,14 @@ def main():
         if s.body[0].pos == snack.pos:
             s.addCube()
             snack = Cube(randomSnack(rows, s), color=(0, 255, 0))
+
+        for x in range(len(s.body)):
+            if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
+                message_box('You Lost!',
+                            f'Play again...\n Score:{len(s.body)}')
+                s.reset((10, 10))
+                break
+
         redrawWindow(win)
 
 
